@@ -24,6 +24,10 @@
         <Cybage_Swatches>
             <active>true</active>
             <codePool>community</codePool>
+            <depends>
+                 <Mage_Adminhtml/>
+                 <Mage_Catalog/>
+             </depends>
         </Cybage_Swatches>
     </modules>
 </config>

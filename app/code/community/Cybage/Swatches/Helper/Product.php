@@ -42,7 +42,7 @@ class Cybage_Swatches_Helper_Product extends Mage_Catalog_Helper_Product
 
         if(!$product->isVisibleInCatalog() || !$product->isVisibleInSiteVisibility()){
             $productType = $this->getProductInfo($product->getId());
-            if($productType == "configurable"){
+            if($productType == Mage_Catalog_Model_Product_Type_Configurable:: TYPE_CODE){
                 return true;
             }
         }

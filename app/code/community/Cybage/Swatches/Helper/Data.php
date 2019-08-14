@@ -20,10 +20,15 @@
 
 class Cybage_Swatches_Helper_Data extends Mage_Core_Helper_Abstract
 {    
+    /*  @return path of swatch image */
+    public function getSwatchImageDir()
+    {
+        return Mage::getBaseDir('media') . DIRECTORY_SEPARATOR . 'swatches' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+    }
+    /*  @return URl of images */
     public function getUploadedImageUrl($attrValue)
     {
-        $uploadDir = Mage::getBaseDir('media') . DIRECTORY_SEPARATOR . 
-                                                    'swatches' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+        $uploadDir = $this->getSwatchImageDir();
 
         if (file_exists($uploadDir . $attrValue . '.jpg'))
         {
@@ -32,13 +37,12 @@ class Cybage_Swatches_Helper_Data extends Mage_Core_Helper_Abstract
         return '';
     }
 
+    /* returns the swatch block html */
+    
     public function getSwatchesBlock($_product, $html)
     {
-        $block = Mage::app()->getLayout()->createBlock(
-                'Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList',
-                'swatches_catalog_product_view_type_configurable_list',
-                array('template' => 'cybage/swatches/configurable.phtml')
-                );  
+        $block = Mage::app()->getLayout()->createBlock('swatches/catalog_product_view_type_configurableList');
+        $block->setTemplate('cybage/swatches/configurable.phtml');
         $block->setProduct($_product);
         $block->setNameInLayout('product.info.options.configurable');
         
@@ -46,34 +50,37 @@ class Cybage_Swatches_Helper_Data extends Mage_Core_Helper_Abstract
         
         return $html;
     }
-
-    public function getthumbImageSize()
+    /* return the Thumbimage size */
+      public function getthumbImageSize()
     {
         return Mage::getStoreConfig('swatches/list/thumb_img_size_list');
     } 
-
+    
+    /* return the size of options */
     public function getOptionsImageSize()
     {
         return Mage::getStoreConfig('swatches/list/img_size_list');
     } 
 
+    /* return the size of swatch on view page */
+    
     public function getOptionsImageSizePDP()
     {
         return Mage::getStoreConfig('swatches/pdp/img_size_pdp');
     } 
 
+    /* return array */
     public function getUseSwatches($attributeId)
     {
         $confAttr = Mage::getModel('swatches/attribute')->load($attributeId, 'attribute_id');
         return array($confAttr->getUseSwatches());
     }
-
+    /* return the imageUrl of product */
     public function getProductImageUrl($productId,$optionId)
     {
         $attrValue = $productId."-".$optionId;
         
-        $uploadDir = Mage::getBaseDir('media') . DIRECTORY_SEPARATOR . 
-                                                    'swatches' . DIRECTORY_SEPARATOR . 'products' . DIRECTORY_SEPARATOR;
+        $uploadDir = $this->getSwatchImageDir();
 
         if (file_exists($uploadDir . $attrValue . '.jpg'))
         {
@@ -81,7 +88,7 @@ class Cybage_Swatches_Helper_Data extends Mage_Core_Helper_Abstract
         }
         return '';
     }
-
+   /* return the swatches based on priority */
     public function getSwatchesBasedOnPriority($attrValue,$productId)
     {
         $productLevelSwatches = $this->getProductImageUrl($productId,$attrValue);

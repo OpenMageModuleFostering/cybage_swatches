@@ -55,7 +55,7 @@
                         </show_swatches>
                     </fields>
                 </default>
-                <list>
+                <list translate="label">
                     <label>Category List Page Settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>20</sort_order>
@@ -83,7 +83,7 @@
                         </img_size_list>
                     </fields>
                 </list>
-                <pdp>
+                <pdp translate="label">
                     <label>Product Details Page Settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>30</sort_order>

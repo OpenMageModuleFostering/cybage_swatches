@@ -37,9 +37,6 @@ class Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Main ex
             $fieldset = $form->addFieldset('swatches_fieldset',
                 array('legend'=>Mage::helper('eav')->__('Swatches Properties'))
             );
-           
-
-            //$fieldset = $form->getElement('base_fieldset');
             $fieldset->addField(
                 'useSwatches', 'select', array(
                 'name' => 'useSwatches',

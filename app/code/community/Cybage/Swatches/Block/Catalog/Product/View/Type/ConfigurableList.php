@@ -23,6 +23,7 @@ class Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList extends M
     protected $_optionProducts;
     protected $_jsonConfig;
     
+    /* return attribute info */
     public function checkConfAttribute()
    {
         $configAttributes = $this->getAllowAttributes();
@@ -36,6 +37,7 @@ class Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList extends M
        return $attributeInfoArray;
     }
 
+    /* return htm data */
     protected function _afterToHtml($html)
     {
 
@@ -49,10 +51,12 @@ class Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList extends M
             if ($this->_optionProducts)
             {
                 $this->_optionProducts = array_values($this->_optionProducts);
+                 $countOptionProducts = count($this->_optionProducts);
                 foreach ($simpleProducts as $simple)
                 {
                     $key = array();
-                    for ($i = 0; $i < count($this->_optionProducts); $i++)
+                   
+                    for ($i = 0; $i < $countOptionProducts ; $i++)
                     {
                         foreach ($this->_optionProducts[$i] as $optionId => $productIds)
                         {
@@ -80,6 +84,7 @@ class Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList extends M
 
         return $html;
     }
+    /* return json*/
 
     public function getJsonConfig()
     {
@@ -105,6 +110,7 @@ class Cybage_Swatches_Block_Catalog_Product_View_Type_ConfigurableList extends M
         return Zend_Json::encode($config);
     }
 
+    /* return json data of product price*/
     public function getPriceForConfig()
     {
         $config = array();

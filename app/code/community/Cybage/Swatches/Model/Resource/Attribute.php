@@ -18,10 +18,10 @@
  * @author     Cybage Software Pvt. Ltd. <Support_Magento@cybage.com>
  */
 
-class Cybage_Swatches_Model_Mysql4_Attribute_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
+class Cybage_Swatches_Model_Resource_Attribute extends Mage_Core_Model_Resource_Db_Abstract
 {
     protected function _construct()
     {
-        $this->_init('swatches/attribute');
+        $this->_init('swatches/attribute', 'entity_id');
     }
 }
