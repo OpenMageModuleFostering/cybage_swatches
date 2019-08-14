@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Cybage Color Swatches Plugin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * It is available on the World Wide Web at:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you are unable to access it on the World Wide Web, please send an email
+ * To: Support_Magento@cybage.com.  We will send you a copy of the source file.
+ *
+ * @category   Color Swatches Plugin
+ * @package    Cybage_Swatches
+ * @copyright  Copyright (c) 2014 Cybage Software Pvt. Ltd., India
+ *             http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Cybage Software Pvt. Ltd. <Support_Magento@cybage.com>
+ */
+-->
+<config>
+    <modules>
+        <Cybage_Swatches>
+            <version>1.0.0</version>
+        </Cybage_Swatches>
+    </modules>
+    <frontend>
+        <routers>
+            <swatches>
+                <use>standard</use>
+                <args>
+                    <module>Cybage_Swatches</module>
+                    <frontName>swatches</frontName>
+                </args>
+            </swatches>
+        </routers>
+        <layout>
+            <updates>
+                <swatches>
+                    <file>cybage_swatches.xml</file>
+                </swatches>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <swatches>
+                    <file>cybage_swatches.xml</file>
+                </swatches>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <blocks>
+            <swatches>
+                <class>Cybage_Swatches_Block</class>
+            </swatches>
+            <!--<adminhtml>
+                <rewrite>
+                    <catalog_product_attribute_edit_tabs>Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tabs</catalog_product_attribute_edit_tabs>
+                </rewrite>
+            </adminhtml>-->
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_attribute_edit_tab_main>Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Main</catalog_product_attribute_edit_tab_main>
+                    <catalog_product_attribute_edit_tab_options>Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
+                    <catalog_product_attribute_edit_form>Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Form</catalog_product_attribute_edit_form>
+					<catalog_product_edit_tab_super_config_grid_renderer_checkbox>Cybage_Swatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Super_Config_Grid_Renderer</catalog_product_edit_tab_super_config_grid_renderer_checkbox>
+                </rewrite>
+            </adminhtml>
+            <catalog>
+                <rewrite>
+                    <product_view_type_configurable>Cybage_Swatches_Block_Catalog_Product_View_Type_Configurable</product_view_type_configurable>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <helpers>
+            <swatches>
+                <class>Cybage_Swatches_Helper</class>
+            </swatches>
+            <catalog>
+                <rewrite>
+                    <product>Cybage_Swatches_Helper_Product</product>
+                </rewrite>
+            </catalog>
+        </helpers>
+        <models>
+            <swatches>
+                <class>Cybage_Swatches_Model</class>
+                <resourceModel>swatches_mysql4</resourceModel>
+            </swatches>
+            <swatches_mysql4>
+                <class>Cybage_Swatches_Model_Mysql4</class>
+                <entities>
+                    <attribute>
+                        <table>cybage_swatches_attribute</table>
+                    </attribute>
+                </entities>
+            </swatches_mysql4>
+        </models>
+        
+        <resources>
+            <swatches_read>
+                <connection><use>core_read</use></connection>
+            </swatches_read>
+            <swatches_write>
+                <connection><use>core_write</use></connection>
+            </swatches_write>
+            <swatches_setup>
+                <setup>
+                    <module>Cybage_Swatches</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </swatches_setup>
+        </resources>
+        <events>
+            <controller_action_postdispatch_adminhtml_catalog_product_attribute_save> 
+                <observers>
+                    <swatches_save_observer>
+                        <type>singleton</type>
+                        <class>swatches/observer</class> 
+                        <method>saveAttributesAfter</method> 
+                    </swatches_save_observer>
+                </observers>          
+            </controller_action_postdispatch_adminhtml_catalog_product_attribute_save>
+            <catalog_product_save_before>
+                <observers>
+                    <swatches_on_product_save>
+                        <type>singleton</type>
+                        <class>swatches/observer</class>
+                        <method>saveCatalogProductAfter</method>
+                    </swatches_on_product_save>
+                </observers>
+            </catalog_product_save_before>	
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <swatches_onlist>
+                        <type>singleton</type>
+                        <class>swatches/observer</class>
+                        <method>onListBlockHtmlBefore</method>
+                    </swatches_onlist>
+                </observers>
+            </core_block_abstract_to_html_after>
+       </events>
+    </global>
+</config>
