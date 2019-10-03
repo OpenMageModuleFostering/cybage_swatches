@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Administrator can use the Color Swatch plug-in for configurable products to define their color, related size, and price at Magento store. For example, you can sell t-shirts in two colors and three sizes. The plug-in is used to define any type of attribute such as size, price, manufacturer, and color.
